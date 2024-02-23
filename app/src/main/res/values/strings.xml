@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Tiendas</string>
+    <string name="decription_image_photo">Imagen de la tienda\n</string>
+    <string name="description_Store_app">Crear tienda\n</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="layout">Nombre de la Tienda</string>
+    <string name="helper_text">Requerido\n</string>
+    <string name="telephone">Telefono</string>
+    <string name="website_url">Url del sitio web</string>
+    <string name="hint_photo_url">url de la imagen</string>
+    <string name="edt_store_title">Crear tienda</string>
+    <string name="mod_store_title">modificar tienda</string>
+    <string name="menu_save">Save\n</string>
+    <string name="arr_id">key_id</string>
+    <string name="succes_val">Tienda actualizada</string>
+    <string name="message_isVAlid">Revise los campos requeridos</string>
+    <string name="dialog_title_delete">Eliminar tienda?</string>
+    <string name="yesdialog">Eliminar</string>
+    <string name="dialogo_delete_cacel">Cancelar</string>
+    <string name="opcion_dialog">Opciones</string>
+</resources>
