@@ -27,8 +27,8 @@ android {
             )
         }
     }
-    viewBinding{
-        enable =true
+    buildFeatures {
+        viewBinding = true
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -40,6 +40,7 @@ android {
 }
 val room_version = "2.5.0"
 val anko_version = "0.10.8"
+val lifecycle_version = "2.7.0"
 
 dependencies {
 
@@ -53,6 +54,9 @@ dependencies {
 
     implementation("androidx.room:room-runtime:$room_version")
     annotationProcessor("androidx.room:room-compiler:$room_version")
+
+    // ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
 
     // To use Kotlin annotation processing tool (kapt)
     kapt("androidx.room:room-compiler:$room_version")
