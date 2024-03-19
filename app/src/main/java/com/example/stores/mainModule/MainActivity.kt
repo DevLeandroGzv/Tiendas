@@ -4,13 +4,12 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.stores.editModule.EditStoreFragment
-import com.example.stores.common.utils.MainAux
 import com.example.stores.R
-import com.example.stores.StoreApplication
 import com.example.stores.common.entities.StoreEntity
 import com.example.stores.databinding.ActivityMainBinding
 import com.example.stores.editModule.viewModel.EditStoreViewModel
@@ -18,8 +17,6 @@ import com.example.stores.mainModule.adapters.OnClickListener
 import com.example.stores.mainModule.adapters.StoreAdapter
 import com.example.stores.mainModule.viewModel.MainViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
 
 class MainActivity : AppCompatActivity(), OnClickListener {
 
@@ -37,12 +34,6 @@ class MainActivity : AppCompatActivity(), OnClickListener {
         mbinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mbinding.root)
 
-//        mbinding.btnSave.setOnClickListener{
-//            val store= StoreEntity(name = mbinding.etName.text.toString().trim())
-//            Thread{
-//            StoreApplication.database.storeDao().addStore(store)}.start()
-//            mAdapter.add(store)
-//        }
         mbinding.fab.setOnClickListener {
             launchEditFragment()
         }
@@ -53,18 +44,21 @@ class MainActivity : AppCompatActivity(), OnClickListener {
 
     private fun setupViewModel() {
         mMainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        mMainViewModel.getstores().observe(this, { stores ->
+        mMainViewModel.getstores().observe(this) { stores ->
             mAdapter.setStores(stores)
-        })
+        }
+        mMainViewModel.isShowProgress().observe(this) { isShowProgress ->
+            mbinding.progressBar.visibility = if (isShowProgress) View.VISIBLE else View.GONE
+        }
 
         mEditStoreViewModel = ViewModelProvider(this).get(EditStoreViewModel::class.java)
-        mEditStoreViewModel.getShowFab().observe(this,{isVisible ->
+        mEditStoreViewModel.getShowFab().observe(this) { isVisible ->
             if (isVisible) mbinding.fab.show() else mbinding.fab.hide()
-        })
+        }
 
-        mEditStoreViewModel.getStoreSelected().observe(this,{storeEntity->
+        mEditStoreViewModel.getStoreSelected().observe(this) { storeEntity ->
             mAdapter.add(storeEntity)
-        })
+        }
 
     }
 
